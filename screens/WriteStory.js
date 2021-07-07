@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, Header } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, Header, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler'
 import firebase from 'firebase'
 import db from '../Config'
@@ -21,11 +21,12 @@ export default class WriteScreen extends React.Component {
         author: this.state.author,
         story: this.state.story
       })
+      ToastAndroid.show("Your story has been submitted!", ToastAndroid.SHORT)
   }
 
   render(){
     return(
-      <View>
+      <KeyboardAvoidingView style = {{flex: 1}} behaviour = "padding" enabled>
         <TextInput
         placeholder = "Title"
         onChangeText = {(text)=>{
@@ -59,7 +60,7 @@ export default class WriteScreen extends React.Component {
 
         </TouchableOpacity>
         
-      </View>
+      </KeyboardAvoidingView>
     )
   }
    

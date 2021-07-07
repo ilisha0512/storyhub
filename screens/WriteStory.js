@@ -8,37 +8,51 @@ export default class WriteScreen extends React.Component {
 
   constructor(){
     super()
+    this.state = {
+      title: "",
+      author: "",
+      story: "",
+    }
   }
 
-  submitStory(){
-    this.state = {
-      title: "Heading",
-      author: "Author",
-      story: "Story",
-    }
+  submitStory = ()=>{
+      db.collection("stories").add({
+        title: this.state.title,
+        author: this.state.author,
+        story: this.state.story
+      })
   }
 
   render(){
     return(
       <View>
         <TextInput
-        placeholder = "Heading"
+        placeholder = "Title"
         onChangeText = {(text)=>{
+          this.setState({
+             title: text
+          })
         }}
         />
         <TextInput
         placeholder = "Author"
         onChangeText = {(text)=>{
+          this.setState({
+            author: text
+         })
         }}
         />
         <TextInput
         placeholder = "Write Your Story"
         onChangeText = {(text)=>{
+          this.setState({
+            story: text
+         })
         }}
         />
         <TouchableOpacity
          style = {styles.submitButton}
-         onPress = {this.submitButton} >
+         onPress = {this.submitStory} >
          <Text>
            Submit  
          </Text> 
